@@ -68,13 +68,28 @@ function Welcome(props:any) {
 }
 
 // design pattern: composability
+function AppTut() {
+    return (
+        <div>
+            <Welcome name="user1"/>
+            <Welcome name="user2"/>
+            <Welcome name="user3"/>
+        </div>
+    )
+}
 
 ReactDOM.render(
     <div>
-        <Welcome 
-            name="Aaron"/>
+        <AppTut/>
     </div>,
 document.getElementById('container'));
+
+// ReactDOM.render(
+//     <div>
+//         <Welcome 
+//             name="Aaron"/>
+//     </div>,
+// document.getElementById('container'));
 
 // ReactDOM.render(
 //     <div>
