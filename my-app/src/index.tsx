@@ -6,9 +6,11 @@ import * as serviceWorker from './serviceWorker';
 
 
 // state is private, not shared
-//initialize state in constructor
+// initialize state in constructor
 
 class LightingCounter extends React.Component<any,any>{
+    timerId:any;
+
     constructor(props:any){
         super(props);
 
@@ -20,7 +22,7 @@ class LightingCounter extends React.Component<any,any>{
 
     timerTick(){
         this.setState((prevState:any, props:any) => ( {
-                strikes: prevState.strikes +1
+                strikes: prevState.strikes + props.increment
             }
         ))
     }
@@ -30,9 +32,12 @@ class LightingCounter extends React.Component<any,any>{
         console.log("in mounted");
 
         //temporization
-        setInterval(() => this.timerTick(), 1000);
+        this.timerId = setInterval(() => this.timerTick(), 1000);
     }
 
+    componentWillUnmount(){
+        clearInterval(this.timerId);
+    }
     
 
     
@@ -47,7 +52,7 @@ class LightingCounter extends React.Component<any,any>{
 
 class LightingCounterParent extends React.Component{
     render(){
-        return <LightingCounter/>
+        return <LightingCounter increment={5}/>
     }
     
     
