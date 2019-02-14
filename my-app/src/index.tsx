@@ -17,6 +17,15 @@ function formatName(user:User) {
     return user.firstName + ", " + user.lastName;
 }
 
+//conditional rendering
+function getStartup(user:User){
+    if (user) {
+        return <div>{ formatName(user) }</div>
+    }
+    else{
+        return <div>Stranger</div>
+    }
+}
 const user:User = {
     firstName:"Aaron",
     lastName:"Woods"
@@ -24,7 +33,7 @@ const user:User = {
 
 const element = (
     <h1>
-        { formatName(user) }
+        { getStartup(user) }
     </h1>
 )
 
