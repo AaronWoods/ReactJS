@@ -4,6 +4,8 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+import { Component2 } from './tests/components/Component2';
+
 // simple component - dealing with children
 class Startup extends React.Component<{ greetTarget: string }>{
     
@@ -125,14 +127,20 @@ const comment = {
 }
 
 ReactDOM.render(
-    <div>
-        <Comment
-            date={comment.date}
-            text={comment.text}
-            author={comment.author}
-        />
-    </div>,
-document.getElementById('container'));
+        <div>
+            <Component2/>
+        </div>,
+    document.getElementById('container'));
+
+// ReactDOM.render(
+//     <div>
+//         <Comment
+//             date={comment.date}
+//             text={comment.text}
+//             author={comment.author}
+//         />
+//     </div>,
+// document.getElementById('container'));
 
 // ReactDOM.render(
 //     <div>
