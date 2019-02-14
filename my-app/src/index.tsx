@@ -4,21 +4,37 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-class Startup extends React.Component{
+// simple component - dealing with children
+class Startup extends React.Component<{ greetTarget: string }>{
+    
+    constructor(props: { greetTarget: string }){
+        super(props);
+        //this.props.greetTarget ="";
+    }
     render(){
         console.log("in render")
         
         return(
-            <p>Simple Render</p>
+            <div>
+                <p>Simple Render {this.props.greetTarget}</p>
+                {this.props.children}
+            </div>
         );
     }
 }
 
 ReactDOM.render(
 <div>
-<Startup />
-<Startup />
-<Startup />
+<Startup greetTarget="user1">
+    SIMPLE CONTENT2
+</Startup>
+<Startup greetTarget="user2">
+    <input type="button" value="Click please"/>
+</Startup>
+<Startup greetTarget="user3">
+    SIMPLE CONTENT3
+</Startup>
+
 </div>, 
 document.getElementById('container'));
 
