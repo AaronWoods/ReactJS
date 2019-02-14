@@ -75,14 +75,70 @@ function AppTut() {
             <Welcome name="user2"/>
             <Welcome name="user3"/>
         </div>
-    )
+    );
+}
+
+// it is difficult to identify the resuable parts
+function formatDate(date:Date) {
+    return date.toLocaleDateString();
+}
+
+interface ComplexProps {
+    date:Date;
+    text:string;
+    author:{
+        name:string;
+        avatarUrl:string;
+    }
+}
+
+function Comment(props:ComplexProps) {
+    return(
+        <div className="Comment">
+            <div className="UserInfo">
+                <img className="Avatar" src={ props.author.avatarUrl}/>
+
+                <div className="UserInfo-name">
+                    {props.author.name}
+                </div>
+            </div>
+
+            <div className="Comment-text">
+                {props.text}
+            </div>
+
+            <div className="Comment-date">
+                {formatDate(props.date)}
+            </div>
+            
+        </div>
+    );
+}
+
+const comment = {
+    date: new Date(),
+    text: "simple message",
+    author: {
+        name: "user1",
+        avatarUrl: "https://image"
+    }
 }
 
 ReactDOM.render(
     <div>
-        <AppTut/>
+        <Comment
+            date={comment.date}
+            text={comment.text}
+            author={comment.author}
+        />
     </div>,
 document.getElementById('container'));
+
+// ReactDOM.render(
+//     <div>
+//         <AppTut/>
+//     </div>,
+// document.getElementById('container'));
 
 // ReactDOM.render(
 //     <div>
