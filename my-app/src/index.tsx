@@ -51,6 +51,10 @@ class Logger extends React.Component<{time:string}> {
         console.log("Did Update");
     }
 
+    componentWillUnmount(){
+        console.log("Will Unmount");
+    }
+
     
     render(){
         console.log("In render");
@@ -62,21 +66,25 @@ class Logger extends React.Component<{time:string}> {
     }
 }
 
-class LoggerParent extends React.Component<any,{currentTime:string}> {
+class LoggerParent extends React.Component<any,{count:number, currentTime:string}> {
     constructor(props:any){
         super(props);
-        this.state = {currentTime:new Date().toLocaleDateString() }
+        this.state = {currentTime:new Date().toLocaleDateString(), count:0}
         this.launchClock();
     }
 
     launchClock(){
         setInterval(() => {
-            this.setState({currentTime:new Date().toLocaleDateString()  })
+            this.setState({currentTime:new Date().toLocaleDateString(), count:this.state.count+1})
         }, 1000);
     }
     
     render(){
+        if(this.state.count > 3){  
+            return <div />
+        }
         return (
+            
             <Logger time={this.state.currentTime} />
         )
     }
