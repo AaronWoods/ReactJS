@@ -37,7 +37,21 @@ const element = (
     </h1>
 )
 
+// controlling attribute values using JSX
+const element1 = <div tabIndex={0}>{user.firstName}</div>
+const element2 = <img src={user.firstName}/>
+const element3 = (
+    <div>
+        <div>a</div>
+        <div>b</div>
+    </div>
+);
+
+// JSX prevents injection attacks
+
+
 ReactDOM.render(element, document.getElementById('root'));
+ReactDOM.render(element2, document.getElementById('container'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
