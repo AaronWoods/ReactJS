@@ -16,24 +16,44 @@ class Logger extends React.Component<{time:string}> {
     constructor(props : {time:string}) {
         super(props);
 
-        console.log("in constructor");
+        console.log("In Constructor");
     }
 
     componentWillMount(){
-        console.log("will mount");
+        console.log("Will Mount");
     }
 
     componentDidMount(){
         //scheduling some logic
         
-        console.log("did mount");
+        console.log("Did Mount");
 
         // we need a reference to native DOM fragment
         console.log("DOM node:" + ReactDOM.findDOMNode(this));
     }
 
+    // updating phase: componentWillReceiveProps + shouldComponentUpdate + componentWillUpdate + render + componentDidUpdate 
+
+    componentWillReceiveProps(nextProps : {time:string}){
+        console.log("Will Receive: " + nextProps.time);
+    }
+
+    shouldComponentUpdate(nextProps: {time:string}, nextState:{}){
+        console.log("Should Update");
+        return true;
+    }
+
+    componentWillUpdate(prevProps: {time:string}, prevState:{}){
+        console.log("Will Update");
+    }
+
+    componentDidUpdate(prevProps: {time:string}, prevState:{}){
+        console.log("Did Update");
+    }
+
+    
     render(){
-        console.log("in render");
+        console.log("In render");
         return (
             <div>
                 {this.props.time}
@@ -46,6 +66,13 @@ class LoggerParent extends React.Component<any,{currentTime:string}> {
     constructor(props:any){
         super(props);
         this.state = {currentTime:new Date().toLocaleDateString() }
+        this.launchClock();
+    }
+
+    launchClock(){
+        setInterval(() => {
+            this.setState({currentTime:new Date().toLocaleDateString()  })
+        }, 1000);
     }
     
     render(){
