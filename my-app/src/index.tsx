@@ -48,10 +48,11 @@ const element3 = (
 );
 
 // JSX prevents injection attacks
-
+const title ='<div>ok</div>'
+const element4 = <h1>{title}</h1>
 
 ReactDOM.render(element, document.getElementById('root'));
-ReactDOM.render(element2, document.getElementById('container'));
+ReactDOM.render(element4, document.getElementById('container'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
