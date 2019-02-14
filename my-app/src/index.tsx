@@ -23,20 +23,66 @@ class Startup extends React.Component<{ greetTarget: string }>{
     }
 }
 
-ReactDOM.render(
-<div>
-<Startup greetTarget="user1">
-    SIMPLE CONTENT2
-</Startup>
-<Startup greetTarget="user2">
-    <input type="button" value="Click please"/>
-</Startup>
-<Startup greetTarget="user3">
-    SIMPLE CONTENT3
-</Startup>
+// summary about what a component can contain 
+type Props = {
+    label: string, //  label?: string  NOT MANDATORY
+    initialCount:number;
+}
 
-</div>, 
-document.getElementById('container'));
+type State = {
+    count:number;
+}
+
+class SummaryComp extends React.Component<Props, State> {
+    
+    //class properties: defaultProps
+    static defaultProps = {
+        label:"label1",
+        initialCount:0                  // do not set default for mandatory props
+    }
+
+    constructor(props:Props){
+        super(props);              //props readonly
+        this.state = { count:0 }   //this.setstate outsitde of constructor //state readable and writeable
+    }
+
+    render(){
+        console.log("in render")
+        
+        return(
+            <div>
+                <p>Simple Render 
+                    {this.props.label}
+                    {this.props.initialCount}
+                    {this.state.count}
+                </p>
+                {this.props.children}
+            </div>
+        );
+    }
+}
+ReactDOM.render(
+    <div>
+        <SummaryComp 
+            label="label100"/>
+    </div>,
+    document.getElementById('container')
+);
+
+// ReactDOM.render(
+// <div>
+// <Startup greetTarget="user1">
+//     SIMPLE CONTENT2
+// </Startup>
+// <Startup greetTarget="user2">
+//     <input type="button" value="Click please"/>
+// </Startup>
+// <Startup greetTarget="user3">
+//     SIMPLE CONTENT3
+// </Startup>
+
+// </div>, 
+// document.getElementById('container'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
