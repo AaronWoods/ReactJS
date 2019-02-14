@@ -80,16 +80,51 @@ class Shirt extends React.Component<{ color: string, num:string, size:string }>{
     }
 }
 
+class Store{
+    constructor(public s:any){
 
+    }   
+}
 
+// context object: sharing a theme
+const ThemeContext = React.createContext(new Store("user1"));
+
+class Button extends React.Component<any>{
+
+    render(){
+        return <div> {this.props.theme.s}</div>     
+    }
+}
+
+class ButtonParent extends React.Component<any>{
+    static contextType = ThemeContext;
+    render(){
+        return <Button theme={this.context}/>    
+    }
+}
+
+class AppTut extends React.Component<any>{
+
+    render(){
+        return (
+            <ThemeContext.Provider value={new Store("user1")}>
+                <ButtonParent />
+            </ThemeContext.Provider>
+        )
+    }
+}
 
 ReactDOM.render(
-    <Shirt
-        color="red"
-        num ="3.14"
-        size="big"
-    />,
+    <AppTut/>,
 document.getElementById('container'));
+
+// ReactDOM.render(
+//     <Shirt
+//         color="red"
+//         num ="3.14"
+//         size="big"
+//     />,
+// document.getElementById('container'));
 
 
 
