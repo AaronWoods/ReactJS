@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import { func } from 'prop-types';
 
 
 // state is private, not shared
@@ -58,11 +59,53 @@ class LightingCounterParent extends React.Component{
     
 }
 
+
+//pure components - we can have a degree of control on the re-render of component
+//function cant have a state 
+//no lifecycle hooks
+
+function MyPureComponent1(props: {username:string}){
+    console.log("in render");
+    return <div>{props.username}</div>
+}
+
+function areEqual(prevProps:{username:string}, newProps:{username:string}){
+    console.log("in areEqual");
+    return false;
+}
+
+class ParentComp extends React.Component<any,{username:string}>{
+    constructor(props:{username:string}){
+        super(props)
+        this.state = {username: "user1"}
+        this.mycomp = React.memo(MyPureComponent1, areEqual); //component def, not instance
+    }
+    mycomp:any;
+
+    componentDidMount(){
+        console.log("in componentDidMount");
+        this.setState((prevState, prevProps) => {
+            return  {username : "newval" }
+        })
+    };
+    render(){
+        return (
+            <this.mycomp username={this.state.username}/>
+        )
+    }
+}
+
 ReactDOM.render(
     <div>
-        <LightingCounterParent/>
+        <ParentComp />
     </div>,
 document.getElementById('root'));
+
+// ReactDOM.render(
+//     <div>
+//         <LightingCounterParent/>
+//     </div>,
+// document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
