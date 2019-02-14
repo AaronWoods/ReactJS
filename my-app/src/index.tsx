@@ -42,8 +42,8 @@ class SummaryComp extends React.Component<Props, State> {
     }
 
     constructor(props:Props){
-        super(props);              //props readonly
-        this.state = { count:0 }   //this.setstate outsitde of constructor //state readable and writeable
+        super(props);              // props readonly
+        this.state = { count:0 }   // this.setstate outsitde of constructor //state readable and writeable
     }
 
     render(){
@@ -61,13 +61,28 @@ class SummaryComp extends React.Component<Props, State> {
         );
     }
 }
+
+// cut down the boilerplate code
+function Welcome(props:any) {
+    return <h1>{props.name}</h1>
+}
+
+// design pattern: composability
+
 ReactDOM.render(
     <div>
-        <SummaryComp 
-            label="label100"/>
+        <Welcome 
+            name="Aaron"/>
     </div>,
-    document.getElementById('container')
-);
+document.getElementById('container'));
+
+// ReactDOM.render(
+//     <div>
+//         <SummaryComp 
+//             label="label100"/>
+//     </div>,
+// document.getElementById('container'));
+
 
 // ReactDOM.render(
 // <div>
