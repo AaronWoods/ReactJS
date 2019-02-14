@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import { SIGVTALRM } from 'constants';
 
 // properties routing - verbose syntax 
 class Display extends React.Component<{ color: string, num:string, size:string }>{
@@ -114,9 +115,42 @@ class AppTut extends React.Component<any>{
     }
 }
 
+
+// React.Fragment no more common parent
+class Columns extends React.Component{
+
+    render(){
+        return (
+            <>
+                <td>col1</td>
+                <td>col2</td>
+            </>
+        );
+    }
+
+}
+
+class Table extends React.Component{
+
+    render(){
+        return (
+            <table>
+                <tbody>
+                    <tr>
+                        <Columns />
+                    </tr>
+                </tbody>
+            </table>
+        );
+    }
+
+}
+
 ReactDOM.render(
-    <AppTut/>,
+    <Table/>,
 document.getElementById('container'));
+
+
 
 // ReactDOM.render(
 //     <Shirt
