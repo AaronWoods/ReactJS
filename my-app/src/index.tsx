@@ -71,16 +71,24 @@ function MyPureComponent1(props: {username:string}){
 
 function areEqual(prevProps:{username:string}, newProps:{username:string}){
     console.log("in areEqual");
-    return false;
+    return false; // flag controls re-render
 }
 
-class ParentComp extends React.Component<any,{username:string}>{
+// shallow properties comparison
+
+//class ParentComp extends React.Component<any,{username:string}>{ //not shallow - 
+class ParentComp extends React.PureComponent<any,{username:string}>{  //shallow - checks only incoming props for re-render - cant use shouldComponentUpdate lifecycle hook
+    mycomp:any;
+
     constructor(props:{username:string}){
         super(props)
         this.state = {username: "user1"}
         this.mycomp = React.memo(MyPureComponent1, areEqual); //component def, not instance
     }
-    mycomp:any;
+    
+    // shouldComponentUpdate(){
+    //     return false;
+    // }
 
     componentDidMount(){
         console.log("in componentDidMount");
@@ -88,6 +96,7 @@ class ParentComp extends React.Component<any,{username:string}>{
             return  {username : "newval" }
         })
     };
+    
     render(){
         return (
             <this.mycomp username={this.state.username}/>
