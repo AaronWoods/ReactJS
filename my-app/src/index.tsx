@@ -40,17 +40,25 @@ class Logger extends React.Component<{time:string}> {
 
     shouldComponentUpdate(nextProps: {time:string}, nextState:{}){
         console.log("Should Update");
-        return true;
+        return true; // flat to render or not
     }
 
     componentWillUpdate(prevProps: {time:string}, prevState:{}){
         console.log("Will Update");
     }
 
-    componentDidUpdate(prevProps: {time:string}, prevState:{}){
+    componentDidUpdate(prevProps: {time:string}, prevState:{}, snapshot:any){
         console.log("Did Update");
     }
 
+    //rarely use method
+    // getSnapshotBeforeUpdate(prevProps: {time:string}, prevState:{}){
+    //     console.log("snapshot before update");
+
+    //     return 10; //meaningful to send to the componentDidUpdate method
+    // }
+
+    // unmounting phase
     componentWillUnmount(){
         console.log("Will Unmount");
     }
