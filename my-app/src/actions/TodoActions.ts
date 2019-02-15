@@ -1,5 +1,6 @@
 export enum ActionTypes{
-    ADD_TODO='add_todo'
+    ADD_TODO='add_todo',
+    SET_VISIBILITY_FILTER='visibility_filter'
 }
 
 export interface Todo{
@@ -12,6 +13,11 @@ export interface Todo{
 export interface AddTodoAction {
     type:ActionTypes.ADD_TODO
     payload: {todo:Todo}
+}
+
+export interface SetVisibilityFilterAction {
+    type:ActionTypes.SET_VISIBILITY_FILTER
+    payload: { filter: string }
 }
 
 let nextTodoId = 0;
@@ -28,5 +34,14 @@ export const addTodo = (name:string) : AddTodoAction => {
     }
 }
 
+export const SetVisibilityFilter = (filter:string) : SetVisibilityFilterAction => {
+    return { 
+        type: ActionTypes.SET_VISIBILITY_FILTER,
+        payload: {
+            filter: filter
+        }
+    }
+}
+
 // union type
-export type Action = AddTodoAction
+export type Action = AddTodoAction | SetVisibilityFilterAction

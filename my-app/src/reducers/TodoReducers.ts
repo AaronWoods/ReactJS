@@ -2,23 +2,32 @@ import { Action, Todo, ActionTypes } from "../actions/TodoActions";
 import { combineReducers } from "redux";
 
 export interface State {
-    todos:Todo[]
+    todos:Todo[],
+    visibilityFilter:string
 }
 
 const initialState:State = {
-    todos:[]
+    todos:[],
+    visibilityFilter:'SHOW_ALL'
 }
 
 // reducers
-export const todosAction = (state:State=initialState, action:Action) => {
+export const todosAction = (state:Todo[] = [], action:Action) => {
+
+    console.log(state + " " + action.type);
+
     switch(action.type){
         case ActionTypes.ADD_TODO:{
             const todo = action.payload.todo;
 
-            return {
+            return [
                 ...state,
-                todos: [ ...state.todos, todo]
-            }
+                {
+                    id: todo.id,
+                    name:todo.name,
+                    completed: todo.completed
+                }
+            ]
         }
 
         default:
@@ -26,4 +35,18 @@ export const todosAction = (state:State=initialState, action:Action) => {
     }
 }
 
-export const todoApp = combineReducers( { todos: todosAction });
+export const visibilityFilterAction = (state:string='SHOW_ALL', action:Action) => {
+
+    console.log(state + " " + action.type);
+
+    switch(action.type){
+        case ActionTypes.SET_VISIBILITY_FILTER:
+            return action.payload.filter;
+
+        default:
+            return state;
+    }
+
+}
+
+export const todoApp = combineReducers( { todos: todosAction , visibilityFilterAction })
