@@ -1,7 +1,8 @@
 export enum ActionTypes{
     ADD_TODO='add_todo',
     SET_VISIBILITY_FILTER='visibility_filter',
-    TOGGLE_TODO='toggle_todo'
+    TOGGLE_TODO='toggle_todo',
+    GET_TODOS='get_todos'
 }
 
 export interface Todo{
@@ -26,7 +27,13 @@ export interface ToggleTodoAction {
     payload: { id: number }
 }
 
+export interface GetTodosAction {
+    type:ActionTypes.GET_TODOS
+    payload: { todos: Todo[] }
+}
+
 let nextTodoId = 0;
+/*
 export const addTodo = (name:string) : AddTodoAction => {
     return { 
         type: ActionTypes.ADD_TODO,
@@ -36,6 +43,16 @@ export const addTodo = (name:string) : AddTodoAction => {
                 name:name,
                 completed:false
             }
+        }
+    }
+}
+*/
+
+export const addTodo = (todo:Todo) : AddTodoAction => {
+    return { 
+        type: ActionTypes.ADD_TODO,
+        payload: {
+            todo:todo
         }
     }
 }
@@ -58,5 +75,12 @@ export const ToggleTodo = (id:number) : ToggleTodoAction => {
     }
 }
 
+export const getTodos = (todos:Todo[]) : GetTodosAction => {
+    return { 
+        type: ActionTypes.GET_TODOS,
+        payload: { todos:todos }
+    }
+}
+
 // union type
-export type Action = AddTodoAction | SetVisibilityFilterAction | ToggleTodoAction
+export type Action = AddTodoAction | SetVisibilityFilterAction | ToggleTodoAction | GetTodosAction

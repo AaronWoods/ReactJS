@@ -34,6 +34,12 @@ export const todosAction = (state:Todo[] = [], action:Action) => {
             return state.map( todo => (todo.id == action.payload.id ) ? { ...todo, completed:!todo.completed} : todo )
         }
 
+        case ActionTypes.GET_TODOS: {
+            return [
+                ...action.payload.todos
+            ];
+        }
+
         default:
             return state;
     }
