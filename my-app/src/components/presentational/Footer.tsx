@@ -3,17 +3,17 @@ import {LinkContainer} from '../container/LinkContainer'
 export const Footer = () => (
     <p>
         <LinkContainer
-        filter="SHOW=ALL"> 
+        filter="SHOW_ALL"> 
         All 
         </LinkContainer>
         {' , '}
         <LinkContainer
-        filter="SHOW=ACTIVE"> 
+        filter="SHOW_ACTIVE"> 
         Active
         </LinkContainer>
         {' , '}
         <LinkContainer
-        filter="SHOW=COMPLETED"> 
+        filter="SHOW_COMPLETED"> 
         Completed
         </LinkContainer>
     </p>

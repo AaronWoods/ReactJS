@@ -30,14 +30,18 @@ export const todosAction = (state:Todo[] = [], action:Action) => {
             ]
         }
 
+        case ActionTypes.TOGGLE_TODO: {
+            return state.map( todo => (todo.id == action.payload.id ) ? { ...todo, completed:!todo.completed} : todo )
+        }
+
         default:
             return state;
     }
 }
 
-export const visibilityFilterAction = (state:string='SHOW_ALL', action:Action) => {
+export const visibilityFilter = (state:string='SHOW_ALL', action:Action) => {
 
-    console.log(state + " " + action.type);
+    console.log(action.payload);
 
     switch(action.type){
         case ActionTypes.SET_VISIBILITY_FILTER:
@@ -49,4 +53,6 @@ export const visibilityFilterAction = (state:string='SHOW_ALL', action:Action) =
 
 }
 
-export const todoApp = combineReducers( { todos: todosAction , visibilityFilterAction })
+
+
+export const todoApp = combineReducers( { todos: todosAction , visibilityFilter })
