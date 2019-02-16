@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
-import { App } from './components/presentational/App';
+//import { App } from './components/presentational/App';
 import * as serviceWorker from './serviceWorker';
 import { createStore, applyMiddleware } from 'redux';
 import { todoApp } from './reducers/TodoReducers';
@@ -73,14 +73,94 @@ import { CheckboxWithLabel } from './testing/CheckboxWithLabel';
 //     }
 // }
 
+
+//the following is responsible for managing errors that will come from children in render methods
+interface Err{
+    error: any,
+    errorInfo:any    
+}
+
+class ErrorBoundary extends React.Component<any, Err>{
+    constructor(props:any){
+        super(props);
+
+        this.state = { error:null, errorInfo:null }
+    }
+
+    componentDidCatch(error:any, errorInfo:any){
+        this.setState({
+            error:error,
+            errorInfo:errorInfo
+        })
+    }
+
+    render(){
+        if(this.state.errorInfo){
+            return (
+                <div>
+                    { this.state.error && this.state.error.toString() }
+                    { this.state.errorInfo.componentStack }
+                </div>
+            )
+        }
+        return this.props.children;
+    }
+}
+
+class FailureComponent1 extends React.Component{
+    componentDidCatch(){
+        console.log("in local componentDidCatch");
+    }
+    
+    render(){
+        if(true)
+            throw new Error("I crashed")
+        
+
+        return <button onClick={(e) => { 
+            try {
+                throw new Error("In handler")
+            }catch(e) {
+                console.log("Manage");
+            }
+        }}>ERROR</button>    
+    }
+}
+
+class GoodComponent2 extends React.Component{
+    render(){
+        return <h1>Genuine</h1>    
+    }
+}
+
+function App(){
+    return (
+        <div>
+            <ErrorBoundary>
+                <FailureComponent1 />
+                <GoodComponent2 />
+            </ErrorBoundary>
+            <ErrorBoundary>
+                <GoodComponent2 />
+            </ErrorBoundary>
+        </div>
+    )
+}
+
 ReactDOM.render(
     <div>
-        <CheckboxWithLabel
-            labelOn="ON"
-            labelOff="OFF"
-        >Google</CheckboxWithLabel>
+        <App />
     </div>,
 document.getElementById('root'));
+
+// ReactDOM.render(
+//     <div>
+//         <CheckboxWithLabel
+//             labelOn="ON"
+//             labelOff="OFF"
+//         >Google</CheckboxWithLabel>
+//     </div>,
+// document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
