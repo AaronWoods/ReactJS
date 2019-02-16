@@ -13,66 +13,68 @@ import thunk from 'redux-thunk';
 import { AppRouter } from './routing/AppRouter';
 import { throws } from 'assert';
 
-class Cat extends React.Component<any,any>{
+import {Link} from './testing/Link'
 
-    render(){
-        const mouse = this.props.mouse;
-        return (
-            <div>
-                {mouse.x} {mouse.y}
-            </div>
+// class Cat extends React.Component<any,any>{
+
+//     render(){
+//         const mouse = this.props.mouse;
+//         return (
+//             <div>
+//                 {mouse.x} {mouse.y}
+//             </div>
             
-        )
+//         )
         
-    }
-}
+//     }
+// }
 
-//render prop: another possibility to reuse code
-class Mouse extends React.Component<any,any>{
-    constructor(props:any){
-        super(props);
+// //render prop: another possibility to reuse code
+// class Mouse extends React.Component<any,any>{
+//     constructor(props:any){
+//         super(props);
 
-        this.handleMouseMove = this.handleMouseMove.bind(this);
-        this.state = { x:0, y:0}
-    }
+//         this.handleMouseMove = this.handleMouseMove.bind(this);
+//         this.state = { x:0, y:0}
+//     }
 
-    handleMouseMove(e:any){
-        this.setState({
-            x:e.clientX, y:e.clientY
-        })
-    }
+//     handleMouseMove(e:any){
+//         this.setState({
+//             x:e.clientX, y:e.clientY
+//         })
+//     }
 
-    render(){
-        return (
-            <div 
-                style={ {height: '100%', width:'100%'}} 
-                onMouseMove= {this.handleMouseMove}
-            >
-                {this.props.render(this.state)}
-            </div>
-        )
-    }
-}
+//     render(){
+//         return (
+//             <div 
+//                 style={ {height: '100%', width:'100%'}} 
+//                 onMouseMove= {this.handleMouseMove}
+//             >
+//                 {this.props.render(this.state)}
+//             </div>
+//         )
+//     }
+// }
 
-class MouseTracker extends React.Component{
-    render(){
-        return (
-            <div>
-                <Mouse 
-                    render={(mouse:any) => (
-                        <Cat 
-                            mouse={mouse} 
-                        />
-                    )}
-                />
-            </div>
-        )
-    }
-}
+// class MouseTracker extends React.Component{
+//     render(){
+//         return (
+//             <div>
+//                 <Mouse 
+//                     render={(mouse:any) => (
+//                         <Cat 
+//                             mouse={mouse} 
+//                         />
+//                     )}
+//                 />
+//             </div>
+//         )
+//     }
+// }
 
 ReactDOM.render(
     <div>
-        <MouseTracker />    
+        <Link>Google</Link>
     </div>,
 document.getElementById('root'));
 
