@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { TodoList } from "../presentational/TodoList";
+import { TodoList, TodoListWR } from "../presentational/TodoList";
 import { State } from "../../reducers/TodoReducers";
 import { Todo, ToggleTodo } from "../../actions/TodoActions";
 import { toggleTodoAsync, deleteTodoAsync } from "../../actions/async/TodoActionsAsync";
@@ -41,4 +41,5 @@ const mapDespatchToProps = (dispatch:any) => {
     }
 }
 
-export const TodoListContainer = connect(mapStateToProps, mapDespatchToProps)(TodoList);
+//export const TodoListContainer = connect(mapStateToProps, mapDespatchToProps)(TodoList);
+export const TodoListContainer = connect(mapStateToProps, mapDespatchToProps)(TodoListWR);

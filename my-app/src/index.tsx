@@ -10,6 +10,7 @@ import { Provider } from 'react-redux';
 import { AppContainer } from './components/container/AppContainer';
 
 import thunk from 'redux-thunk';
+import { AppRouter } from './routing/AppRouter';
 
 // Entry Point: we create a store, a Redux object responsible for invoking the reducers
 //let store = createStore(todoApp);
@@ -19,7 +20,7 @@ console.log(store.getState());
 
 ReactDOM.render(
     <Provider store={store}>
-        <AppContainer />
+        <AppRouter />
     </Provider>,
 document.getElementById('container'));
 

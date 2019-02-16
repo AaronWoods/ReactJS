@@ -3,6 +3,7 @@ import { AddTodo } from './AddTodo';
 import { AddToContainer } from '../container/AddTodoContainer';
 import { TodoListContainer } from '../container/TodoListContainer';
 import { Footer } from './Footer';
+import { HeaderApp } from './HeaderApp';
 
 /*
 export const App = () : JSX.Element => (
@@ -29,6 +30,7 @@ export class App extends React.Component<AppProps>{
     render(){
         return (
             <div>
+                
                 <AddToContainer/>
                 <TodoListContainer />
                 <Footer />

@@ -17,7 +17,7 @@ export const TodoItem:React.FC<{completed:boolean, name:string, onClick:() => vo
 }
 */
 
-export const TodoItem:React.FC<{completed:boolean, name:string, onClick:() => void, onClickDelete:() => void}> = props => {
+export const TodoItem:React.FC<{completed:boolean, name:string, onClick:() => void, onClickDelete:() => void, onClickEdit:() => void}> = props => {
 
     return (
         <tr>
@@ -30,6 +30,9 @@ export const TodoItem:React.FC<{completed:boolean, name:string, onClick:() => vo
         
         
             {props.name}
+            </td>
+            <td>
+                <button onClick={(e) => { props.onClickEdit()}}>Edit</button>
             </td>
             <td>
                 <button onClick={(e) => { props.onClickDelete()}}>Delete</button>

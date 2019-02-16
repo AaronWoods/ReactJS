@@ -62,3 +62,19 @@ export const deleteTodoAsync = (id:number): any => {
         })
     }
 }
+
+export const updateTodoAsync = (t:Todo): any => {
+
+    return async function (dispatch:any) : Promise<void>{
+        return toggleTodoAPI(t)
+        .then(function(response){
+            return response.json();
+        })
+        .then(function(myJSON){
+            console.log(JSON.stringify(myJSON));
+
+            //dispatch(addTodo(myJSON));
+            dispatch(getTodosAsync());
+        })
+    }
+}
