@@ -14,6 +14,7 @@ import { AppRouter } from './routing/AppRouter';
 import { throws } from 'assert';
 
 import {Link} from './testing/Link'
+import { CheckboxWithLabel } from './testing/CheckboxWithLabel';
 
 // class Cat extends React.Component<any,any>{
 
@@ -74,7 +75,10 @@ import {Link} from './testing/Link'
 
 ReactDOM.render(
     <div>
-        <Link>Google</Link>
+        <CheckboxWithLabel
+            labelOn="ON"
+            labelOff="OFF"
+        >Google</CheckboxWithLabel>
     </div>,
 document.getElementById('root'));
 
