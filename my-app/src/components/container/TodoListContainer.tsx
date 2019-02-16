@@ -2,6 +2,7 @@ import { connect } from "react-redux";
 import { TodoList } from "../presentational/TodoList";
 import { State } from "../../reducers/TodoReducers";
 import { Todo, ToggleTodo } from "../../actions/TodoActions";
+import { toggleTodoAsync } from "../../actions/async/TodoActionsAsync";
 
 const getVisibleTodos = ( todos:Todo[], filter:string)=> {
     switch(filter) {
@@ -25,10 +26,17 @@ const mapStateToProps = (state:State) => {
         todos: getVisibleTodos(state.todos, state.visibilityFilter)
     }
 }
-
+/*
 const mapDespatchToProps = (dispatch:any) => {
     return {
         onTodoClick:(id:number) => {dispatch(ToggleTodo(id))}
+    }
+}
+*/
+
+const mapDespatchToProps = (dispatch:any) => {
+    return {
+        onTodoClick:(todo:Todo) => {dispatch(toggleTodoAsync(todo))}
     }
 }
 
