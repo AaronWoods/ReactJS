@@ -11,90 +11,60 @@ import { AppContainer } from './components/container/AppContainer';
 
 import thunk from 'redux-thunk';
 import { AppRouter } from './routing/AppRouter';
+import { throws } from 'assert';
 
-// Entry Point: we create a store, a Redux object responsible for invoking the reducers
-//let store = createStore(todoApp);
-/*
-let store = createStore(todoApp, applyMiddleware(thunk.withExtraArgument("....")));
+class Cat extends React.Component<any,any>{
 
-console.log(store.getState());
-
-ReactDOM.render(
-    <Provider store={store}>
-        <AppRouter />
-    </Provider>,
-document.getElementById('container'));
-*/
-
-// HOC: function
-
-const LoadWebSite = (Component:any) => {
-    class _LoadWebSite extends React.Component<any, any>{
-
-        constructor(props:any){
-            super(props);
-
-            this.state = { label:"Run", handleClick:this.handleClick.bind(this)}
-        }
+    render(){
+        const mouse = this.props.mouse;
+        return (
+            <div>
+                {mouse.x} {mouse.y}
+            </div>
+            
+        )
         
-        getUrl(){
-            //return 'https://www.google.com'
-            return 'http://localhost:3500/todos';
-        }
-
-        handleClick(event:any) {
-            (document.getElementById("frame") as HTMLFrameElement).src =this.getUrl();
-        }
-
-        render(){
-            return <Component {...this.props} {...this.state} />
-        }
-
-
-
     }
-
-    return _LoadWebSite;
 }
 
-class Button extends React.Component<any>{
+//render prop: another possibility to reuse code
+class Mouse extends React.Component<any,any>{
+    constructor(props:any){
+        super(props);
+
+        this.handleMouseMove = this.handleMouseMove.bind(this);
+        this.state = { x:0, y:0}
+    }
+
+    handleMouseMove(e:any){
+        this.setState({
+            x:e.clientX, y:e.clientY
+        })
+    }
 
     render(){
         return (
-            <button
-                onClick={this.props.handleClick}>
-                {this.props.label}
-            </button>
+            <div 
+                style={ {height: '100%', width:'100%'}} 
+                onMouseMove= {this.handleMouseMove}
+            >
+                {this.props.render(this.state)}
+            </div>
         )
     }
 }
 
-class Link extends React.Component<any>{
-
-    render(){
-        return (
-            <a
-                onClick={this.props.handleClick}
-                href="#">
-                {this.props.label}
-            </a>
-        )
-    }
-}
-
-const EnhanceButton = LoadWebSite(Button);
-const EnhanceLink = LoadWebSite(Link);
-
-class Content extends React.Component{
-    
+class MouseTracker extends React.Component{
     render(){
         return (
             <div>
-                <EnhanceButton />
-                <br />
-                <EnhanceLink />
-                <br />
-                <iframe id="frame" src="" width="500" height="500"/>
+                <Mouse 
+                    render={(mouse:any) => (
+                        <Cat 
+                            mouse={mouse} 
+                        />
+                    )}
+                />
             </div>
         )
     }
@@ -102,7 +72,7 @@ class Content extends React.Component{
 
 ReactDOM.render(
     <div>
-        <Content />
+        <MouseTracker />    
     </div>,
 document.getElementById('root'));
 
