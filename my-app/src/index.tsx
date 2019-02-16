@@ -69,7 +69,21 @@ class Button extends React.Component<any>{
     }
 }
 
+class Link extends React.Component<any>{
+
+    render(){
+        return (
+            <a
+                onClick={this.props.handleClick}
+                href="#">
+                {this.props.label}
+            </a>
+        )
+    }
+}
+
 const EnhanceButton = LoadWebSite(Button);
+const EnhanceLink = LoadWebSite(Link);
 
 class Content extends React.Component{
     
@@ -77,6 +91,8 @@ class Content extends React.Component{
         return (
             <div>
                 <EnhanceButton />
+                <br />
+                <EnhanceLink />
                 <br />
                 <iframe id="frame" src="" width="500" height="500"/>
             </div>
