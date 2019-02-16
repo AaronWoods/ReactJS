@@ -18,7 +18,7 @@ export function addTodoAPI(t:Todo) {
     });
 }
 
-//POST
+//PUT
 export function toggleTodoAPI(t:Todo) {
     
     var data:any =t;
@@ -29,5 +29,12 @@ export function toggleTodoAPI(t:Todo) {
         headers:{
             'Content-Type':'application/json'
         }
+    });
+}
+
+export function deleteTodoAPI(id:number) {
+
+    return fetch('http://localhost:3500/todos/' + id, {
+        method:"DELETE",
     });
 }

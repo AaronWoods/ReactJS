@@ -20,6 +20,7 @@ export const TodoList:React.FC<{todos:Todo[], onTodoClick:(id:number) => void }>
 }
 */
 
+/*
 export const TodoList:React.FC<{todos:Todo[], onTodoClick:(id:Todo) => void }> = props => {
 
     return (
@@ -33,5 +34,23 @@ export const TodoList:React.FC<{todos:Todo[], onTodoClick:(id:Todo) => void }> =
                 />
             ))}
         </ul>
+    )
+}
+*/
+
+export const TodoList:React.FC<{todos:Todo[], onTodoClick:(id:Todo) => void , onTodoClickDelete:(id:number) => void}> = props => {
+
+    return (
+        <table>
+            {props.todos.map(( todo: Todo ) => (
+                <TodoItem 
+                    key={todo.id}
+                    name={todo.name}
+                    completed={todo.completed}
+                    onClick={() => props.onTodoClick(todo) }
+                    onClickDelete={() => props.onTodoClickDelete(todo.id)}
+                />
+            ))}
+        </table>
     )
 }
